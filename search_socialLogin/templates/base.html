@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>eunyoung</title>
+    <style>
+        body{
+            width: 1200px;
+            margin: auto;
+            height: auto;
+            font-family: 'Nanum Myeongjo', serif;
+            background-color: rgb(245, 245, 245);
+        }
+        #topLogo{
+            position: relative;
+            top : 40px;
+        }
+        #topmenu{
+            position: relative;
+            left :1050px;
+            top : -20px;
+        }
+        a{
+            text-decoration: none;
+            color: brown;
+            font-weight: 900;
+        }
+        a:hover{
+            text-decoration: none;
+            color: olive;
+            font-weight: 900;
+        }
+        a:visited{
+            text-decoration: none;
+            color: brown;
+        }
+        
+        .hi{
+            position: relative;
+            left :-160px;
+            font-size: 25px;
+        }
+        footer{
+            position: relative;
+            top : -20px;
+            text-align: center;
+        }
+        #dino{
+            position: relative;
+            top : 10px;
+        }
+        </style>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    {%load socialaccount%}
+    {% load static %}
+    {% providers_media_js %}
+    <a  href="{% url 'home'%}"><img id="topLogo" src= "{%static '동덕로고3.png'%}" alt='image' height="170px"></a>
+    <br><br>
+    <div id="topmenu">
+        {% if user.is_authenticated %}
+            
+            <div class="hi">
+                {% if user.is_staff %}
+                    {{user.username}} 관리자 계정입니다.
+                {% else %}
+                    {{user.username}}님 안녕하세요!
+                {%endif%}
+            </div><a href="/accounts/logout">로그아웃</a>
+        {% else %}
+        
+            <a href="/accounts/signup">회원가입</a>&nbsp |&nbsp 
+            <!--<a href=" {% provider_login_url 'google' method='oauth2'%} ">구글로그인</a>-->
+            <a class="button is-light" href="{% url 'account_login' %}">Login</a>   
+            <br><br><br>
+        {%endif%}
+            
+    </div>
+    
+    <div class="container">
+        {%block content%}
+        {%endblock%}
+    </div>
+    <hr><br>
+   
+    <footer>
+        <embed id="dino" src= "{%static '하트.gif'%}" alt='image' height="40px">
+            멋쟁이 사자 9기 정은영 동덕여대 컴퓨터학과 01050058331 
+        <embed id="dino" src= "{%static '하트.gif'%}" alt='image' height="40px">
+        </footer><br><br>
+</body>
+</html>

@@ -1,0 +1,80 @@
+{%extends 'base.html'%}//맨위에
+
+{%block content %}
+
+{% load static %}
+<style>
+     #midMenu , #midMenu a{
+            text-align: right;
+            background-color: brown;
+            color:rgb(245, 245, 245);
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+     #contents{
+        height: 710px;
+        background-color: white;
+        background-image: url("{%static '학교.jpg'%}");
+        background-size: cover;
+        text-align: center;
+        overflow-y:scroll;
+        overflow-x:hidden;
+            }
+    #content{
+        width: 500px;
+        margin:auto;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        margin-bottom: 10px;
+        background-color: rgb(247, 247, 247);
+       }    
+    form{
+        margin: auto;
+        background-color: rgb(247, 247, 247);
+        width: 500px;;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+</style>
+
+
+<div id="midMenu">
+    {% if user.is_authenticated %}
+    <a href="{% url 'newPost' %}">새 글 작성하기</a>&nbsp;&nbsp&nbsp&nbsp
+    {% endif %}
+    {% if user.is_staff%}
+    |&nbsp<a id="deleteAll" href="{% url 'deleteAll'%}">전체 게시글 삭제</a> &nbsp&nbsp&nbsp&nbsp
+    {% endif %}
+</div>  
+<div class="postlist">
+<div id="contents">
+    
+        <br><br>
+       
+        <form action="." method="post"> {% csrf_token %}
+            <h1>제목/ 내용 검색</h1>
+                {{ form.as_table }} <!-- form을 테이블 형식으로 표시, 여기서 form은 views에서 넘겨준 PostSearchForm 객체임-->
+                <input type="submit" value="Submit" class="btn btn-primary btn-sm">
+                <hr width="300px">
+            </form>
+
+       
+        
+            <br><br>
+             {% if object_list %}
+                {% for unit in object_list %}
+                <div id="content">  
+                    제목 | {{unit.title}}<br> 
+                    작성자 | {{unit.writer}}<br>
+                    설명 |  {{unit.summary}} 
+                    <a class="toNext" href="{% url 'detailPage' unit.id%}">...더보기</a><br>
+            </div>
+            <br>
+            {% endfor %}
+            <br>
+        {% elif search_term %}<!-- 검색란이 공란인지 확인-->
+            <b><i>Search Word({{ search_term }}) Not Found</i></b>
+        {% endif %}
+    </div>
+</div>
+{%endblock%}

@@ -1,0 +1,95 @@
+{%extends 'base.html'%}
+
+{%block content %}
+
+    {%load socialaccount%}
+    {% load static %}
+    {% providers_media_js %}
+    <style>
+        #midMenu , #midMenu a{
+            text-align: right;
+            background-color: brown;
+            color:rgb(245, 245, 245);
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        a:hover , #midMenu a:hover{
+            text-decoration: none;
+            color: olive;
+            font-weight: 900;
+        }
+        #contents{
+            height: 710px;
+            background-color: white;
+            background-image: url("{%static '학교.jpg'%}");
+            background-size: cover;
+            text-align: center;
+        }
+        #content{
+            width: 500px;
+            margin:auto;
+            padding-top: 30px;
+            padding-bottom: 30px;
+            margin-bottom: 10px;
+            background-color: rgb(247, 247, 247);
+            border: 1px solid rgb(83, 9, 9) ;
+       }
+       .postlist{
+           background-color: rgb(255, 255,255,0.5);
+           height:  800px;
+           border-bottom-right-radius: 35px;
+           border-bottom-left-radius: 35px;
+       }
+       .pageNav{
+           position: relative;
+           top:-170px;
+           font-weight: 900;
+       }
+    </style>
+    <div id="midMenu">
+        <a href="{% url 'search' %}">검색하기</a> &nbsp;
+        {% if user.is_authenticated %}
+       |&nbsp;
+        <a href="{% url 'newPost' %}">새 글 작성하기</a>&nbsp;&nbsp&nbsp&nbsp
+        {% endif %}
+        {% if user.is_staff%}
+        |&nbsp<a id="deleteAll" href="{% url 'deleteAll'%}">전체 게시글 삭제</a> &nbsp&nbsp&nbsp&nbsp
+        {% endif %}
+    </div>  
+    <div id="contents">
+        <div class="postlist">
+            <br><h1>글 목록</h1>
+            <hr width="300px">
+            <br><br>
+            
+                {% for unit in blogPosts %}<!--근데 여기서는 항목별로 보이게 하려고 for문 써줌-->
+                <div id="content">  
+                    제목 | {{unit.title}}<br> 
+                    작성자 | {{unit.writer}}<br>
+                    설명 |  {{unit.summary}} 
+                    <a class="toNext" href="{% url 'detailPage' unit.id%}">...더보기</a><br>
+                
+            </div>
+            <br>
+            {% endfor %}
+        </div>
+        {#First Previous 3 of 4 Next Last#}
+        <div class="pageNav">
+            <!--First Previous-->
+            {% if blogPosts.has_previous%}
+            <a href="?page=1">First</a>
+            <a href="?page={{blogPosts.previous_page_number}}">Previous</a>
+            {% endif %}
+            <!--현재 of 전체-->
+            <span>{{blogPosts.number}}</span>
+            <span>of</span>
+            <span>{{blogPosts.paginator.num_pages}}</span>
+            <!--Next Last-->
+            {% if blogPosts.has_next%}
+            <a href="?page={{blogPosts.next_page_number}}">Next</a>
+            <a href="?page={{blogPosts.paginator.num_pages}}">Last</a>
+            {% endif %}
+        </div> 
+        <br><br>
+    </div>
+{%endblock%}
