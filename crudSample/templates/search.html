@@ -4,22 +4,11 @@
 
 {% load static %}
 <style>
-     #midMenu , #midMenu a{
-            text-align: right;
-            background-color: brown;
-            color:rgb(245, 245, 245);
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
+    
      #contents{
-        height: 710px;
-        background-color: white;
-        background-image: url("{%static '학교.jpg'%}");
-        background-size: cover;
-        text-align: center;
         overflow-y:scroll;
         overflow-x:hidden;
-            }
+        }
     #content{
         width: 500px;
         margin:auto;
@@ -38,14 +27,6 @@
 </style>
 
 
-<div id="midMenu">
-    {% if user.is_authenticated %}
-    <a href="{% url 'newPost' %}">새 글 작성하기</a>&nbsp;&nbsp&nbsp&nbsp
-    {% endif %}
-    {% if user.is_staff%}
-    |&nbsp<a id="deleteAll" href="{% url 'deleteAll'%}">전체 게시글 삭제</a> &nbsp&nbsp&nbsp&nbsp
-    {% endif %}
-</div>  
 <div class="postlist">
 <div id="contents">
     

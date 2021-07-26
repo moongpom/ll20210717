@@ -11,12 +11,6 @@
             font-family: 'Nanum Myeongjo', serif;
             background-color: rgb(245, 245, 245);
         }
-        #contents{
-            height: 690px;
-            background-color: white;
-            background-image: url("{%static '목화배경.png'%}");
-            text-align: center;
-        }
         #topLogo{
             position: relative;
             top : 40px;
@@ -44,10 +38,14 @@
         }
         a:visited{
             text-decoration: none;
-            color: rgb(179, 108, 108);
+            color:  rgb(179, 108, 108);
         }
-        
-       
+        #contents{
+            height: 690px;
+            background-color: white;
+            background-image: url("{%static '목화배경.png'%}");
+            text-align: center;
+        }
         footer{
             position: relative;
             top : -20px;
@@ -59,13 +57,20 @@
         }
         #midMenuList , #midMenuList a{
             text-align: right;
-            background-color: rgb(179, 108, 108);
+            background-color:  rgb(179, 108, 108);
             color:rgb(245, 245, 245);
          
         }
         #midMenuList{
-            height: 50px;
-            padding-top: 20px;
+            height: 22px;
+            padding-bottom: -5px;
+        }
+        .hi{
+            position: relative;
+            top:23px;
+            left: -920px;
+            font-size: 25px;
+            color:rgb(245, 245, 245);
         }
         </style>
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -80,7 +85,7 @@
     <br><br>
     <div id="topmenu">
         {% if user.is_authenticated %}
-           <a  class="logout" href="/accounts/logout">로그아웃</a>
+           <a class="logout"  href="/accounts/logout">로그아웃</a>
         {% else %}
         
             <a href="/accounts/signup">회원가입</a>&nbsp |&nbsp 
@@ -89,10 +94,18 @@
             <br><br><br>
         {%endif%}
     </div>
+   
     <div id="midMenu">
-       
+        {% if user.is_authenticated %}    
+            <div class="hi">
+                {% if user.is_staff %}
+                    {{user.username}} 관리자 계정입니다.
+                {% else %}
+                    {{user.username}}님 안녕하세요!
+                {%endif%}
+            </div>
+        {%endif%}
         <div id="midMenuList">
-            <br>
             <a href="{% url 'search' %}">검색하기</a> &nbsp;
             {% if user.is_authenticated %}
         |&nbsp;
@@ -108,12 +121,11 @@
 
         {%endblock%}
     </div>
-    <hr width="auto"><br>
+    <hr><br>
    
-    <footer>
-        <br>
+    <footer><br>
            동덕여대 멋쟁이 사자 9기 김지원 전혜인 정은영 정재운 
-            <br><br>
+           <br><br>
             <a href="https://everytime.kr/" ><img src="{%static 'everytime.png'%}" height="20px">에브리타임</a>
             <a href="https://www.dongduk.ac.kr/kor/main.do" ><img src="{%static 'Gyopyo.png'%}" height="20px">동덕여자대학교 홈페이지</a>
         </footer><br><br>

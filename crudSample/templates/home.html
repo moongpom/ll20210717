@@ -1,4 +1,5 @@
-{%extends 'base.html'%}
+
+{%extends 'base_home.html'%}
 
 {%block content %}
 
@@ -6,9 +7,10 @@
     {% load static %}
     {% providers_media_js %}
     <style>
+       
         #midMenu , #midMenu a{
             text-align: right;
-            background-color: brown;
+            background-color:  rgb(179, 108, 108);
             color:rgb(245, 245, 245);
             padding-top: 10px;
             padding-bottom: 10px;
@@ -18,22 +20,7 @@
             color: olive;
             font-weight: 900;
         }
-        #contents{
-            height: 710px;
-            background-color: white;
-            background-image: url("{%static '학교.jpg'%}");
-            background-size: cover;
-            text-align: center;
-        }
-        #content{
-            width: 500px;
-            margin:auto;
-            padding-top: 30px;
-            padding-bottom: 30px;
-            margin-bottom: 10px;
-            background-color: rgb(247, 247, 247);
-            border: 1px solid rgb(83, 9, 9) ;
-       }
+        
        .postlist{
            background-color: rgb(255, 255,255,0.5);
            height:  800px;
@@ -45,17 +32,23 @@
            top:-170px;
            font-weight: 900;
        }
+       
+       table ,td,tr,th{
+           text-align: center;
+           background-color: rgb(247, 241, 241);
+           margin: auto;
+           border: 1px solid rgb(83, 9, 9) ;
+           border-collapse: collapse;
+           padding: 15px;
+          
+       }
+       td{width: 200px;}
+       
+       .summary th,.summary td{
+           height: 30px;
+       }
     </style>
-    <div id="midMenu">
-        <a href="{% url 'search' %}">검색하기</a> &nbsp;
-        {% if user.is_authenticated %}
-       |&nbsp;
-        <a href="{% url 'newPost' %}">새 글 작성하기</a>&nbsp;&nbsp&nbsp&nbsp
-        {% endif %}
-        {% if user.is_staff%}
-        |&nbsp<a id="deleteAll" href="{% url 'deleteAll'%}">전체 게시글 삭제</a> &nbsp&nbsp&nbsp&nbsp
-        {% endif %}
-    </div>  
+
     <div id="contents">
         <div class="postlist">
             <br><h1>글 목록</h1>
@@ -64,10 +57,13 @@
             
                 {% for unit in blogPosts %}<!--근데 여기서는 항목별로 보이게 하려고 for문 써줌-->
                 <div id="content">  
-                    제목 | {{unit.title}}<br> 
-                    작성자 | {{unit.writer}}<br>
-                    설명 |  {{unit.summary}} 
-                    <a class="toNext" href="{% url 'detailPage' unit.id%}">...더보기</a><br>
+                    <a class="toNext" href="{% url 'detailPage' unit.id%}">
+                        <table>
+                            <tr><th>제목</th><td>{{unit.title}}</td><th>작성자</th><td>{{unit.writer}}</td></tr>
+                            
+                            <tr class="summary"><th>설명</th><td colspan="3">{{unit.summary}} </td></tr>
+                         </table>
+                   </a><br>
                 
             </div>
             <br>

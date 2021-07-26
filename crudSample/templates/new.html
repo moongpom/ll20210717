@@ -3,14 +3,7 @@
 {%block content %}
 {% load static %}
     <style>
-          #midMenu , #midMenu a{
-            text-align: right;
-            background-color: brown;
-            color:rgb(245, 245, 245);
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-       
+  
         .detailTable,tr,td,th{
             text-align: center;
             margin: auto;
@@ -18,13 +11,6 @@
             border-collapse: collapse;
             padding: 30px;
             background-color: white;
-        }
-        #contents{
-            height: 710px;
-            background-color: white;
-            background-image: url("{%static '학교.jpg'%}");
-            background-size: cover;
-            text-align: center;
         }
         .postlist{
            background-color: rgb(255, 255,255,0.5);
@@ -40,13 +26,7 @@
             width:70px;
         }
     </style>
-    <br>
-    <div id="midMenu">
-        <a href="{% url 'search' %}">검색하기</a> &nbsp;
-        {% if user.is_staff%}
-        |&nbsp<a id="deleteAll" href="{% url 'deleteAll'%}">전체 게시글 삭제</a> &nbsp&nbsp&nbsp&nbsp
-        {% endif %}
-    </div>   
+  
     <div id="contents">
         <div class="postlist">
             <br><br><br><br><br><br><br>
