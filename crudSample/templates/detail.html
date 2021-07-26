@@ -39,7 +39,15 @@
                     {% endif %}
                 </td></tr>
                 <tr><th>제목</th><td> {{postContents.title}}</td></tr>
-                <tr><th>작성자</th> <td>  {{postContents.writer}} </td></tr>
+
+                <tr><th>작성자</th> <td>
+                    {% if postContents.showName == True %}
+                      {{postContents.writer}}
+                    {% else %} 
+                        익명
+                    {% endif %}
+
+                    </td></tr>
                 <tr><th>본문</th><td  width = "300px" ><textarea cols="40" rows="10">{{postContents.body}}</textarea></td></tr>
             </table>
             <br><br>

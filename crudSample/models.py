@@ -3,6 +3,7 @@ from django.db import models
 class Post(models.Model):
     title = models.CharField(max_length=200) 
     writer = models.CharField(max_length=50) 
+    showName = models.BooleanField()
     pub_date=models.DateTimeField()
     body=models.TextField()
     image = models.ImageField(upload_to="mediaForm/",blank=True,null=True)

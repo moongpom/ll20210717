@@ -29,6 +29,7 @@ def new(request):
         post_form = PostForm(request.POST,request.FILES)
         if post_form.is_valid():# 이 form을 유효한지 검사후 유효하면 save해줌 (임시저장)
             post = post_form.save(commit = False)#임시저장 해주는 이유는 model에 있는 필드 중 new date를 안 담았음 (commit=False)
+            
             post.writer = request.user
             post.pub_date = timezone.now() 
             post.save()

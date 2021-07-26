@@ -59,7 +59,14 @@
                 <div id="content">  
                     <a class="toNext" href="{% url 'detailPage' unit.id%}">
                         <table>
-                            <tr><th>제목</th><td>{{unit.title}}</td><th>작성자</th><td>{{unit.writer}}</td></tr>
+                            <tr><th>제목</th><td>{{unit.title}}</td><th>작성자</th><td>
+                                
+                            {% if unit.showName == True %}
+                                {{unit.writer}}
+                            {% else %} 
+                                  익명
+                            {% endif %}
+                            </td></tr>
                             
                             <tr class="summary"><th>설명</th><td colspan="3">{{unit.summary}} </td></tr>
                          </table>
