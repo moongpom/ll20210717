@@ -25,11 +25,18 @@
         th{
             width:70px;
         }
+        h1{
+            font-weight: 900;
+            font-size: 30pt;
+            color: rgb(179, 108, 108);
+            text-shadow: 1pt 1pt black;
+        }
     </style>
   
     <div id="contents">
         <div class="postlist">
-            <br><br><br><br><br><br><br>
+            <br>
+            <h1>New Post</h1><br>
             <form  method="post" enctype="multipart/form-data">
                 {%csrf_token%}
                 <table class="detailTable">

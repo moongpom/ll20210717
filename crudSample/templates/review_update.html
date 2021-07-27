@@ -1,6 +1,6 @@
 
 
-{%extends 'base.html'%}//맨위에
+{%extends 'base.html'%}
 
 {%block content %}
 {% load static %}
@@ -37,14 +37,15 @@
  
     <div id="contents">
         <div class="postlist">
-    <br><h1>Edit Post</h1><br>
+    <br><br><h1>댓글/답글 수정하기</h1><br><br>
     <form  method="post" enctype="multipart/form-data">
         {%csrf_token%}
         <table class="detailTable">
-            {{edit_post.as_table}}
+            {{com_form.as_p}}
         </table>
-        <br><button type="submit">올리기</button>
+        <br><button type="submit">수정하기</button>
     </form>
     </div></div>
-  
+
+   
 {%endblock%}
