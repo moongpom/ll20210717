@@ -1,0 +1,1 @@
+web: gunicorn search_socialLogin.wsgi --log-file -
